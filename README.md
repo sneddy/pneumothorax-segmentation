@@ -9,7 +9,8 @@
 
 ### Main Features
 - duplet/triplet scheme of validation/inference
-- combo loss combinations of BCE, dice and focal
+- \[[combo loss\]]
+(https://github.com/SpaceNetChallenge/SpaceNet_Off_Nadir_Solutions/blob/master/selim_sef/training/losses.py) combinations of BCE, dice and focal
     - (3,1,4)
     - (1,1,1)
     - (2,1,2)
