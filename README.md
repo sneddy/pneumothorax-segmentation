@@ -8,7 +8,7 @@
 - SCSEUnet (seresnext50) from \[[selim_sef SpaceNet 4\]](https://github.com/SpaceNetChallenge/SpaceNet_Off_Nadir_Solutions/tree/master/selim_sef/zoo)
 
 ### Main Features
-- **Triplet scheme of validation/inference**
+- **Triplet scheme of inference**
 Instead of classification models for pneumathorax/non-pneumathorax images, I used two different thresholds: 
     - first one for mask binarization and transform in 
     - second threshold is maximum allowed number of pixels with value greater than the first threshold
