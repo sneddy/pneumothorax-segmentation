@@ -68,7 +68,7 @@ albu.Compose([
 ])
 ```
 ### Uptrain from lower resolution
-- All experiments (except resnet50) uptrained on size 1024x1024 after 512x512 with freezed encoder on first epoches.  
+- All experiments (except resnet50) uptrained on size 1024x1024 after 512x512 with frozen encoder on early epoches.  
 
 ### Checkpoints averaging
 top3 checkpoints averaging from each pipeline on inference
