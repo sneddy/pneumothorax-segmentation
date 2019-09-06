@@ -50,7 +50,7 @@ Large sample rate at the beginning provides a quick start of learning process, w
 
 ### Learning Process parts
 During learning process I was uptrain my models **A LOT**. Looking back for formalization of my experiments I can highlight 4 different parts:
-- **part 0** - train for 10-12 epoches from pretrained model with large learning rate (about 1e-3 or 1e-4), large sample rate (0.8) and ReduceLROnPlateau scheduller . Model can be pretrained on imagenet or on our dataset with lower resolution (512x512).  
+- **part 0** - train for 10-12 epoches from pretrained model with large learning rate (about 1e-3 or 1e-4), large sample rate (0.8) and ReduceLROnPlateau scheduller . Model can be pretrained on imagenet or on our dataset with lower resolution (512x512).  Goal of this part: quickly get a good enough model with validation score about 0.835. 
 - **part 1** - uptrain best model from previous step with normal learning rate (~1e-5), large sample rate (0.6) and CosineAnnealingLR or CosineAnnealingWarmRestarts scheduler. Repeat until best convergence.
 - **part 2** - uptrain best model from previous step with normal learning rate (~1e-5), small sample rate (0.4) and CosineAnnealingLR or CosineAnnealingWarmRestarts scheduler. Repeat until best convergence.
 - **second_stage** - simple uptrain with relatively small learning rate, small sample rate (0.5) and CosineAnnealingLR or CosineAnnealingWarmRestarts scheduler.
