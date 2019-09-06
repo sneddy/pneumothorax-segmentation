@@ -1,0 +1,1 @@
+{"__version__": "0.3.1", "transform": {"__class_fullname__": "albumentations.core.composition.Compose", "p": 1.0, "transforms": [{"__class_fullname__": "albumentations.augmentations.transforms.Resize", "always_apply": true, "p": 1, "height": 1024, "width": 1024, "interpolation": 1}], "bbox_params": {}, "keypoint_params": {}, "additional_targets": {}}}
