@@ -1,0 +1,12 @@
+SAMPLE_SUB: ../input/stage_2_sample_submission.csv
+MASK_DICT: experiments/resnet50/result_top3.pkl
+
+AREA_THRESHOLD: 1000
+TOP_SCORE_THRESHOLD: 0.75
+BOTTOM_SCORE_THRESHOLD: 0.4
+LEAK_SCORE_THRESHOLD: 0.15
+USELEAK: False
+USECONTOURS: False
+
+
+SUB_FILE: ../subs/2nd_stage_resnet50.csv

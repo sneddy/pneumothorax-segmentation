@@ -1,0 +1,34 @@
+DATA_DIRECTORY: '../input/test_2stage/'
+
+SEED: 42
+NUM_WORKERS: 4
+DEVICE: cuda
+BATCH_SIZE: 1
+
+MODEL:
+  PY: models.selim_zoo.unet
+  CLASS: Resnet
+  ARGS:
+      seg_classes: 1      
+      backbone_arch: resnet50
+
+CHECKPOINTS:
+  FULL_FOLDER: checkpoints
+  BEST_FOLDER: checkpoints
+  PIPELINE_PATH: experiments/resnet50
+  PIPELINE_NAME: resnet50
+
+SUBMIT_BEST: False
+USEFOLDS: [0,1,2,3,4]
+SELECTED_CHECKPOINTS:
+  fold0: [4,5,9]
+  fold1: [10,21,23]
+  fold2: [6,8,10]
+  fold3: [0,2,45]
+  fold4: [1,3,11]
+
+TEST_TRANSFORMS:
+    transforms/valid_transforms_1024.json
+FLIP: True
+
+RESULT: result_top3.pkl
