@@ -17,11 +17,12 @@ Those images that didn't pass this pair of thresholds were counted non-pneumatho
 For other images 
     
 ### Combo loss
-Used \[[combo loss\]](https://github.com/SpaceNetChallenge/SpaceNet_Off_Nadir_Solutions/blob/master/selim_sef/training/losses.py) combinations of BCE, dice and focal
-    - (3,1,4)
-    - (1,1,1)
-    - (2,1,2)
-    
+Used \[[combo loss\]](https://github.com/SpaceNetChallenge/SpaceNet_Off_Nadir_Solutions/blob/master/selim_sef/training/losses.py) combinations of BCE, dice and focal. In the best experiments the weights of (BCE, dice, focal), that I used were:
+- (3,1,4);
+- (1,1,1);
+- (2,1,2);
+respectively
+ 
 ### Sliding sample rate
 Let's name portion of pneumathorax images as sample rate.
 
