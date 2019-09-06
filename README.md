@@ -14,7 +14,7 @@
     - (1,1,1)
     - (2,1,2)
 - sliding sample rate
-- best checkpoints averaging from each pipeline
+- best checkpoints averaging from each pipeline on inference
 - horizontal flip TTA
 
 ### Install
