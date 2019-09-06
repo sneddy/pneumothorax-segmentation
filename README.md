@@ -12,8 +12,8 @@
 Let our segmentation model output some mask with probabilities of pneumothorax pixels. I'm going to name this mask as a basic sigmoid mask. I used triplet of different thresholds: *(top_score_threshold, min_contour_area, bottom_score_threshold)*
 
 The decision rule is based on a doublet *(top_score_threshold, min_contour_area)*. I used it instead of using the classification of pneumothorax/non-pneumothorax.
-- top_score_threshold is simple binarization threshold and transform basic sigmoid mask into a discrete mask of zeros and ones.
-- min_contour_area is the maximum allowed number of pixels with a value greater than top_score_threshold
+- *top_score_threshold* is simple binarization threshold and transform basic sigmoid mask into a discrete mask of zeros and ones.
+- *min_contour_area* is the maximum allowed number of pixels with a value greater than top_score_threshold
 Those images that didn't pass this doublet of thresholds were counted non-pneumothorax images.
 
 For the remaining pneumothorax images, we binarize basic sigmoid mask using *bottom_score_threshold* (another binariztion threshold).
@@ -40,11 +40,11 @@ Used \[[combo loss\]](https://github.com/SpaceNetChallenge/SpaceNet_Off_Nadir_So
 ### Sliding sample rate
 Let's name portion of pneumathorax images as sample rate.
 
-**Main idea:** control this portion using sampler of torch dataset. 
+The main idea is control this portion using sampler of torch dataset. 
 
-On each epoch my sampler get all images from dataset with pneumathorax and sample some from non-pneumathorax according to this sample rate. During train process we reduce this parameter from 0.8 on start to 0.4 in the end.
+On each epoch, my sampler gets all images from a dataset with pneumothorax and sample some from non-pneumothorax according to this sample rate. During train process, we reduce this parameter from 0.8 on start to 0.4 in the end.
 
-Large sample rate at the beginning provides a quick start of learning process, whereas a small sample rate provides better convergence of neural network weights to the initial distribution of pneumathorax/non-pneumathorax images.
+Large sample rate at the beginning provides a quick start of the learning process, whereas a small sample rate at the end provides better convergence of neural network weights to the initial distribution of pneumothorax/non-pneumothorax images.
 
 ### Learning Process parts
 During learning process I was uptrain my models **A LOT**. Looking back for formalization of my experiments I can highlight 4 different parts:
