@@ -74,6 +74,7 @@ top3 checkpoints averaging from each pipeline on inference
 ### Horizontal flip TTA
 
 ## Data Preparation
+here will be guide for transforming input data to my format
 
 ## Install
 ```bash
