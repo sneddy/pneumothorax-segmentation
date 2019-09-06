@@ -9,12 +9,16 @@
 
 ## Main Features
 ### Triplet scheme of inference
-Instead of classification models for pneumathorax/non-pneumathorax images, I used two different thresholds: 
-- first one for mask binarization and transform in 
-- second threshold is maximum allowed number of pixels with value greater than the first threshold
+Let our model output some mask with probabilities of pneumothorax pixels. Let's name this mask as source sigmoid mask. 
+I used triplet of different thresholds: *(top_score_threshold, min_contour_area, bottome_score_threshold)* 
+
+*(top_score_threshold, min_contour_area)* used instead of classification models for pneumathorax/non-pneumathorax images: 
+- *top_score_threshold* is simple binarization threshold and transform source sigmoid mask into a discrete mask of zeros and ones.
+- *min_contour_area* is maximum allowed number of pixels with value greater than *top_score_threshold*
 
 Those images that didn't pass this pair of thresholds were counted non-pneumathorax images. 
-For other images 
+
+For the remaining pneumathorax images we binarize source sigmoid mask using *bottome_score_threshold* - yet another binarizetion threshold. 
 
 ### Search best triplet thresholds during validation 
 - Best triplet on validation: (0.75, 2000, 0.3).
