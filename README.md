@@ -20,10 +20,11 @@ Those images that didn't pass this doublet of thresholds were counted non-pneuma
 
 For the remaining pneumathorax images we binarize source sigmoid mask using *bottome_score_threshold* - yet another binarizetion threshold. 
 
+Simplified version of this scheme:
 ```python
 classification_mask = predicted > top_score_threshold
 mask = predicted.copy()
-mask[classification_mask.sum(axis=(1,2,3)) < area_threshold, :,:,:] = np.zeros_like(predicted[0])
+mask[classification_mask.sum(axis=(1,2,3)) < min_contour_area, :,:,:] = np.zeros_like(predicted[0])
 mask = mask > bot_score_threshold
 return mask
 ```
