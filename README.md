@@ -67,6 +67,8 @@ albu.Compose([
     albu.Resize(img_size,img_size,always_apply=True),
 ])
 ```
+### Uptrain from lower resolution
+- All experiments (except resnet50) uptrained on size 1024x1024 after 512x512 with freezed encoder on first epoches.  
 
 ### Checkpoints averaging
 top3 checkpoints averaging from each pipeline on inference
