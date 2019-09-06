@@ -1,1 +1,0 @@
-python utils/rle2pseudo.py -out_path ../input/dataset1024/pseudo_soloalbunet -sub_path ../subs/albunet1024_top3_v2.csv -n_threads 8
