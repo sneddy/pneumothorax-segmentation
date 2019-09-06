@@ -18,5 +18,7 @@ pip install -r requirements.txt
 
 ### Pipeline launch example
 Training: python Train.py experiments/albunet_valid/train_config_part0.yaml
+
 Inference: python Inference.py experiments/albunet_valid/2nd_stage_inference.yaml
+
 Submit: python TripletSubmit.py experiments/albunet_valid/2nd_stage_submit.yaml
