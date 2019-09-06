@@ -1,0 +1,35 @@
+DATA_DIRECTORY: '../input/test_2stage/'
+
+SEED: 42
+NUM_WORKERS: 4
+DEVICE: cuda
+BATCH_SIZE: 2
+
+MODEL:
+  PY: models.ternausnets
+  CLASS: AlbuNet
+  ARGS:
+    
+    pretrained: False
+
+CHECKPOINTS:
+  FULL_FOLDER: checkpoints
+  BEST_FOLDER: checkpoints
+  PIPELINE_PATH: experiments/albunet_public
+  PIPELINE_NAME: albunet_public
+
+SUBMIT_BEST: False
+USEFOLDS: [0,1,2,3,4]
+SELECTED_CHECKPOINTS:
+  fold0: [0,1,7]
+  fold1: [5,6,12]
+  fold2: [1,3,4]
+  fold3: [0,6,11]
+  fold4: [4,13,20]
+
+
+TEST_TRANSFORMS:
+    transforms/valid_transforms_1024_old.json
+FLIP: True
+
+RESULT: result_top3.pkl
