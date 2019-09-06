@@ -39,8 +39,25 @@ On each epoch my sampler get all images from dataset with pneumathorax and sampl
 
 Large sample rate at the beginning provides a quick start of learning process, whereas a small sample rate provides better convergence of neural network weights to the initial distribution of pneumathorax/non-pneumathorax images.
 
-### Transforms
+### Augmentations
+Used following transforms from \[[augmentations\]](https://github.com/albu/albumentations)
 
+albu.Compose([
+    albu.HorizontalFlip(),
+    albu.OneOf([
+        albu.RandomContrast(),
+        albu.RandomGamma(),
+        albu.RandomBrightness(),
+        ], p=0.3),
+    albu.OneOf([
+        albu.ElasticTransform(alpha=120, sigma=120 * 0.05, alpha_affine=120 * 0.03),
+        albu.GridDistortion(),
+        albu.OpticalDistortion(distort_limit=2, shift_limit=0.5),
+        ], p=0.3),
+    
+    albu.ShiftScaleRotate(),
+    albu.Resize(img_size,img_size,always_apply=True),
+])
 
 ### Checkpoints averaging
 top3 checkpoints averaging from each pipeline on inference
