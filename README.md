@@ -42,7 +42,7 @@ Used \[[combo loss\]](https://github.com/SpaceNetChallenge/SpaceNet_Off_Nadir_So
 ### Sliding sample rate
 Let's name portion of pneumathorax images as sample rate.
 
-Main idea: control this portion using sampler of torch dataset. 
+**Main idea:** control this portion using sampler of torch dataset. 
 
 On each epoch my sampler get all images from dataset with pneumathorax and sample some from non-pneumathorax according to this sample rate. During train process we reduce this parameter from 0.8 on start to 0.4 in the end.
 
