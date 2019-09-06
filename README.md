@@ -68,8 +68,8 @@ python TripletSubmit.py experiments/albunet_valid/2nd_stage_submit.yaml
 My best model for Public Leaderboard was AlbunetPublic (PL: 0.8871), and score of all ensembling models was worse.
 But I suspected overfitting for this model therefore both final submissions were ensembles.
 
-- First ensemble more believe to Public Leaderboard scores and use "weak" triplet thresholds.
-- Second ensemble believed more in the validation score, but used more "strict" triplet thresholds.
+- First ensemble believed in Public Leaderboard scores more and used more "weak" triplet thresholds.
+- Second ensemble believed in the validation scores more, but used more "strict" triplet thresholds.
 
 Private Leaderboard:
 - 0.8679
