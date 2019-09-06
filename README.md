@@ -19,8 +19,13 @@ pip install -r requirements.txt
 ```
 
 ### Pipeline launch example
-Training: python Train.py experiments/albunet_valid/train_config_part0.yaml
-
+Training:
+```bash
+python Train.py experiments/albunet_valid/train_config_part0.yaml
+```
+```bash
 Inference: python Inference.py experiments/albunet_valid/2nd_stage_inference.yaml
-
+```
+```bash
 Submit: python TripletSubmit.py experiments/albunet_valid/2nd_stage_submit.yaml
+```
