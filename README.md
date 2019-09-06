@@ -14,7 +14,9 @@
 - Best checkpoints averaging from each pipeline
 
 ### Install
+```bash
 pip install -r requirements.txt
+```
 
 ### Pipeline launch example
 Training: python Train.py experiments/albunet_valid/train_config_part0.yaml
