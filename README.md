@@ -68,10 +68,13 @@ albu.Compose([
 ])
 ```
 ### Uptrain from lower resolution
-- All experiments (except resnet50) uptrained on size 1024x1024 after 512x512 with frozen encoder on early epoches.  
+All experiments (except resnet50) uptrained on size 1024x1024 after 512x512 with frozen encoder on early epoches.  
+
+### Second stage uptrain
+All choosen experiments was uptrained on second stage data
 
 ### Checkpoints averaging
-top3 checkpoints averaging from each pipeline on inference
+Top3 checkpoints averaging from each pipeline on inference
 
 ### Horizontal flip TTA
 
