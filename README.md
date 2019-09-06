@@ -12,7 +12,7 @@
 Let our model output some mask with probabilities of pneumothorax pixels. Let's name this mask as source sigmoid mask. 
 I used triplet of different thresholds: *(top_score_threshold, min_contour_area, bottome_score_threshold)* 
 
-Doublet *(top_score_threshold, min_contour_area)* used instead of classification models for pneumathorax/non-pneumathorax images: 
+Doublet *(top_score_threshold, min_contour_area)* used instead of pneumathorax/non-pneumathorax classification models:
 - *top_score_threshold* is simple binarization threshold and transform source sigmoid mask into a discrete mask of zeros and ones.
 - *min_contour_area* is maximum allowed number of pixels with value greater than *top_score_threshold*
 
