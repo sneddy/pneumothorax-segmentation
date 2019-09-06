@@ -9,18 +9,16 @@
 
 ## Main Features
 ### Triplet scheme of inference
-Let our sementation model output some mask with probabilities of pneumothorax pixels. Let's name this mask as source sigmoid mask. 
-I used triplet of different thresholds: *(top_score_threshold, min_contour_area, bottome_score_threshold)* 
+Let our segmentation model output some mask with probabilities of pneumothorax pixels. I'm going to name this mask as a basic sigmoid mask. I used triplet of different thresholds: *(top_score_threshold, min_contour_area, bottom_score_threshold)*
 
-Decision rule based on doublet *(top_score_threshold, min_contour_area)* used instead of pneumathorax/non-pneumathorax classification models:
-- *top_score_threshold* is simple binarization threshold and transform source sigmoid mask into a discrete mask of zeros and ones.
-- *min_contour_area* is maximum allowed number of pixels with value greater than *top_score_threshold*
+The decision rule is based on a doublet *(top_score_threshold, min_contour_area)*. I used it instead of using the classification of pneumothorax/non-pneumothorax.
+- top_score_threshold is simple binarization threshold and transform basic sigmoid mask into a discrete mask of zeros and ones.
+- min_contour_area is the maximum allowed number of pixels with a value greater than top_score_threshold
+Those images that didn't pass this doublet of thresholds were counted non-pneumothorax images.
 
-Those images that didn't pass this doublet of thresholds were counted non-pneumathorax images. 
+For the remaining pneumothorax images, we binarize basic sigmoid mask using *bottom_score_threshold* (another binariztion threshold).
 
-For the remaining pneumathorax images we binarize source sigmoid mask using *bottome_score_threshold* - yet another binarizetion threshold. 
-
-Simplified version of this scheme:
+The simplified version of this scheme:
 ```python
 classification_mask = predicted > top_score_threshold
 mask = predicted.copy()
