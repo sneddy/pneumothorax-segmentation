@@ -101,6 +101,8 @@ python TripletSubmit.py experiments/albunet_valid/2nd_stage_submit.yaml
 - seunet - best seresnext50 model on validation
 - resnet50 - best resnet50 model on validation
 
+More info on \[[experiment dashboard\]](https://docs.google.com/spreadsheets/d/1dFpgEV2HMrRUsF58gfvBrsnRTzkRSAzPYscEuGgg-vs/edit?usp=sharing)
+
 
 ## Final Submission
 My best model for Public Leaderboard was AlbunetPublic (PL: 0.8871), and score of all ensembling models was worse.
