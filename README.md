@@ -42,6 +42,7 @@ Large sample rate at the beginning provides a quick start of learning process, w
 ### Augmentations
 Used following transforms from \[[augmentations\]](https://github.com/albu/albumentations)
 
+```python
 albu.Compose([
     albu.HorizontalFlip(),
     albu.OneOf([
@@ -58,6 +59,7 @@ albu.Compose([
     albu.ShiftScaleRotate(),
     albu.Resize(img_size,img_size,always_apply=True),
 ])
+```
 
 ### Checkpoints averaging
 top3 checkpoints averaging from each pipeline on inference
