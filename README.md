@@ -86,13 +86,13 @@ Top3 checkpoints averaging from each pipeline on inference
 
 ### Horizontal flip TTA
 
-## Data Preparation
-here will be guide for transforming input data to my format
-
 ## Install
 ```bash
 pip install -r requirements.txt
 ```
+
+## Data Preparation
+here will be guide for transforming input data to my format
 
 ## Pipeline launch example
 Training:
