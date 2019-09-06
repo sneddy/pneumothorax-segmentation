@@ -1,0 +1,35 @@
+DATA_DIRECTORY: '../input/test_2stage/'
+
+SEED: 42
+NUM_WORKERS: 8
+DEVICE: cuda
+BATCH_SIZE: 1
+
+MODEL:
+  FREEZE: False
+  PY: models.selim_zoo.unet
+  CLASS: SCSEUnet
+  ARGS:
+      seg_classes: 1  
+
+CHECKPOINTS:
+  FULL_FOLDER: checkpoints
+  BEST_FOLDER: checkpoints
+  PIPELINE_PATH: experiments/seunet
+  PIPELINE_NAME: seunet
+
+SUBMIT_BEST: False
+USEFOLDS: [0,1,2,3,4]
+SELECTED_CHECKPOINTS:
+  fold0: [1,4,7]
+  fold1: [14,15,16]
+  fold2: [4,5,7]
+  fold3: [0,9,10]
+  fold4: [3,10,13]
+
+TEST_TRANSFORMS:
+    transforms/valid_transforms_1024_old.json
+FLIP: True
+
+AGGREGATION: mean #not implement
+RESULT: result_top3.pkl
