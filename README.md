@@ -10,8 +10,8 @@
 ### Main Features
 - duplet/triplet scheme of validation/inference
 - various combo loss combinations of BCE, focal and dice
-- Sliding sample rate
-- Best checkpoints averaging from each pipeline
+- sliding sample rate
+- best checkpoints averaging from each pipeline
 
 ### Install
 ```bash
