@@ -20,6 +20,14 @@ Those images that didn't pass this doublet of thresholds were counted non-pneuma
 
 For the remaining pneumathorax images we binarize source sigmoid mask using *bottome_score_threshold* - yet another binarizetion threshold. 
 
+```python
+classification_mask = predicted > top_score_threshold
+mask = predicted.copy()
+mask[classification_mask.sum(axis=(1,2,3)) < area_threshold, :,:,:] = np.zeros_like(predicted[0])
+mask = mask > bot_score_threshold
+return mask
+```
+
 ### Search best triplet thresholds during validation 
 - Best triplet on validation: (0.75, 2000, 0.3).
 - Best triplet on Public Leaderboard: (0.7, 600, 0.3)
