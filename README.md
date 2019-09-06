@@ -10,8 +10,9 @@
 ## Main Features
 ### Triplet scheme of inference
 Instead of classification models for pneumathorax/non-pneumathorax images, I used two different thresholds: 
-    - first one for mask binarization and transform in 
-    - second threshold is maximum allowed number of pixels with value greater than the first threshold
+- first one for mask binarization and transform in 
+- second threshold is maximum allowed number of pixels with value greater than the first threshold
+
 Those images that didn't pass this pair of thresholds were counted non-pneumathorax images. 
 For other images 
     
