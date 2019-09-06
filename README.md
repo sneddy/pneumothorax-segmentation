@@ -13,7 +13,7 @@
 - Sliding sample rate
 - Best checkpoints averaging from each pipeline
 
-### Installing
+### Install
 pip install -r requirements.txt
 
 ### Pipeline launch example
