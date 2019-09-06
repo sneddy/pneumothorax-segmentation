@@ -9,7 +9,7 @@
 
 ## Main Features
 ### Triplet scheme of inference
-Let our model output some mask with probabilities of pneumothorax pixels. Let's name this mask as source sigmoid mask. 
+Let our sementation model output some mask with probabilities of pneumothorax pixels. Let's name this mask as source sigmoid mask. 
 I used triplet of different thresholds: *(top_score_threshold, min_contour_area, bottome_score_threshold)* 
 
 Decision rule based on doublet *(top_score_threshold, min_contour_area)* used instead of pneumathorax/non-pneumathorax classification models:
@@ -38,6 +38,9 @@ Main idea: control this portion using sampler of torch dataset.
 On each epoch my sampler get all images from dataset with pneumathorax and sample some from non-pneumathorax according to this sample rate. During train process we reduce this parameter from 0.8 on start to 0.4 in the end.
 
 Large sample rate at the beginning provides a quick start of learning process, whereas a small sample rate provides better convergence of neural network weights to the initial distribution of pneumathorax/non-pneumathorax images.
+
+### Transforms
+
 
 ### Checkpoints averaging
 top3 checkpoints averaging from each pipeline on inference
