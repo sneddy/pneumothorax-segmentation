@@ -12,6 +12,7 @@
 - various combo loss combinations of BCE, focal and dice
 - sliding sample rate
 - best checkpoints averaging from each pipeline
+- horizontal flip TTA
 
 ### Install
 ```bash
