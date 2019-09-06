@@ -23,6 +23,8 @@ For other images
 - best checkpoints averaging from each pipeline on inference
 - horizontal flip TTA
 
+### Data Preparation
+
 ### Install
 ```bash
 pip install -r requirements.txt
