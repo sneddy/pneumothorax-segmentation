@@ -1,4 +1,4 @@
-# kaggle-pneumathorax
+# SIIM-ACR Pneumothorax Segmentation
 
 ## First place solution 
 
