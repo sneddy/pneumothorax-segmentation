@@ -9,7 +9,10 @@
 
 ### Main Features
 - duplet/triplet scheme of validation/inference
-- various combo loss combinations of BCE, focal and dice
+- combo loss combinations of BCE, dice and focal
+    - (1,1,1)
+    - (2,1,2)
+    - (3,1,4)
 - sliding sample rate
 - best checkpoints averaging from each pipeline
 - horizontal flip TTA
