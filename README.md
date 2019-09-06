@@ -23,9 +23,11 @@ Training:
 ```bash
 python Train.py experiments/albunet_valid/train_config_part0.yaml
 ```
+Inference:
 ```bash
-Inference: python Inference.py experiments/albunet_valid/2nd_stage_inference.yaml
+python Inference.py experiments/albunet_valid/2nd_stage_inference.yaml
 ```
+Submit:
 ```bash
-Submit: python TripletSubmit.py experiments/albunet_valid/2nd_stage_submit.yaml
+python TripletSubmit.py experiments/albunet_valid/2nd_stage_submit.yaml
 ```
