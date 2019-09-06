@@ -41,3 +41,19 @@ Submit:
 ```bash
 python TripletSubmit.py experiments/albunet_valid/2nd_stage_submit.yaml
 ```
+
+### Best experiments:
+- AlbunetPublic - best model for Public Leaderboard
+- ALbunetValid - best resnet34 model on validation
+- seunet - best seresnext-50 model on validation
+- resnet50 - best resnet50 model on validation
+
+
+### Final Submission
+My best model for Public Leaderboard was AlbunetPublic (PL: 0.8871), and score of all ensembling models was worse.
+But I suspected overfitting for this model therefore both final submissions were ensembles.
+Private Leaderboard:
+- 0.8679
+- 0.8641
+
+
