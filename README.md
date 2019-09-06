@@ -16,7 +16,7 @@ Doublet *(top_score_threshold, min_contour_area)* used instead of pneumathorax/n
 - *top_score_threshold* is simple binarization threshold and transform source sigmoid mask into a discrete mask of zeros and ones.
 - *min_contour_area* is maximum allowed number of pixels with value greater than *top_score_threshold*
 
-Those images that didn't pass this pair of thresholds were counted non-pneumathorax images. 
+Those images that didn't pass this doublet of thresholds were counted non-pneumathorax images. 
 
 For the remaining pneumathorax images we binarize source sigmoid mask using *bottome_score_threshold* - yet another binarizetion threshold. 
 
