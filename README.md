@@ -14,6 +14,7 @@ Let our segmentation model output some mask with probabilities of pneumothorax p
 The decision rule is based on a doublet *(top_score_threshold, min_contour_area)*. I used it instead of using the classification of pneumothorax/non-pneumothorax.
 - *top_score_threshold* is simple binarization threshold and transform basic sigmoid mask into a discrete mask of zeros and ones.
 - *min_contour_area* is the maximum allowed number of pixels with a value greater than top_score_threshold
+
 Those images that didn't pass this doublet of thresholds were counted non-pneumothorax images.
 
 For the remaining pneumothorax images, we binarize basic sigmoid mask using *bottom_score_threshold* (another binariztion threshold).
@@ -46,9 +47,9 @@ On each epoch, my sampler gets all images from a dataset with pneumothorax and s
 
 Large sample rate at the beginning provides a quick start of the learning process, whereas a small sample rate at the end provides better convergence of neural network weights to the initial distribution of pneumothorax/non-pneumothorax images.
 
-### Learning Process parts
-During learning process I was uptrain my models **A LOT**. Looking back for formalization of my experiments I can highlight 4 different parts:
-- **part 0** - train for 10-12 epoches from pretrained model with large learning rate (about 1e-3 or 1e-4), large sample rate (0.8) and ReduceLROnPlateau scheduller . Model can be pretrained on imagenet or on our dataset with lower resolution (512x512).  Goal of this part: quickly get a good enough model with validation score about 0.835. 
+### Learning Process recipes
+I can't provide fully reproducible solution because  during learning process I was uptrain my models **A LOT**. But looking back for formalization of my experiments I can highlight 4 different parts:
+- **part 0** - train for 10-12 epoches from pretrained model with large learning rate (about 1e-3 or 1e-4), large sample rate (0.8) and ReduceLROnPlateau scheduller. Model can be pretrained on imagenet or on our dataset with lower resolution (512x512).  Goal of this part: quickly get a good enough model with validation score about 0.835. 
 - **part 1** - uptrain best model from previous step with normal learning rate (~1e-5), large sample rate (0.6) and CosineAnnealingLR or CosineAnnealingWarmRestarts scheduler. Repeat until best convergence.
 - **part 2** - uptrain best model from previous step with normal learning rate (~1e-5), small sample rate (0.4) and CosineAnnealingLR or CosineAnnealingWarmRestarts scheduler. Repeat until best convergence.
 - **second_stage** - simple uptrain with relatively small learning rate(1e-5 or 1e-6), small sample rate (0.5) and CosineAnnealingLR or CosineAnnealingWarmRestarts scheduler.
@@ -107,8 +108,8 @@ python TripletSubmit.py experiments/albunet_valid/2nd_stage_submit.yaml
 ```
 
 ## Best experiments:
-- AlbunetPublic - best model for Public Leaderboard
-- AlbunetValid - best resnet34 model on validation
+- albunet_public - best model for Public Leaderboard
+- albunet_valid - best resnet34 model on validation
 - seunet - best seresnext50 model on validation
 - resnet50 - best resnet50 model on validation
 
@@ -116,13 +117,13 @@ python TripletSubmit.py experiments/albunet_valid/2nd_stage_submit.yaml
 
 
 ## Final Submission
-My best model for Public Leaderboard was AlbunetPublic (PL: 0.8871), and score of all ensembling models was worse.
+My best model for Public Leaderboard was albunet_public (PL: 0.8871), and score of all ensembling models was worse.
 But I suspected overfitting for this model therefore both final submissions were ensembles.
 
 - First ensemble believed in Public Leaderboard scores more and used more "weak" triplet thresholds.
 - Second ensemble believed in the validation scores more, but used more "strict" triplet thresholds.
 
-Private Leaderboard:
+### Private Leaderboard:
 - 0.8679
 - 0.8641
 
