@@ -8,7 +8,7 @@
 - SCSEUnet (seresnext50) from \[[selim_sef SpaceNet 4\]](https://github.com/SpaceNetChallenge/SpaceNet_Off_Nadir_Solutions/tree/master/selim_sef/zoo)
 
 ## Main Features
-### Triplet scheme of inference
+### Triplet scheme of inference and validation
 Let our segmentation model output some mask with probabilities of pneumothorax pixels. I'm going to name this mask as a basic sigmoid mask. I used triplet of different thresholds: *(top_score_threshold, min_contour_area, bottom_score_threshold)*
 
 The decision rule is based on a doublet *(top_score_threshold, min_contour_area)*. I used it instead of using the classification of pneumothorax/non-pneumothorax.
@@ -84,7 +84,7 @@ All experiments (except resnet50) uptrained on size 1024x1024 after 512x512 with
 All choosen experiments was uptrained on second stage data
 
 ### Checkpoints averaging
-Top3 checkpoints averaging from each pipeline on inference
+Top3 checkpoints averaging from each fold from each pipeline on inference
 
 ### Horizontal flip TTA
 
@@ -104,14 +104,19 @@ python Train.py experiments/albunet_valid/train_config_part1.yaml
 python Train.py experiments/albunet_valid/train_config_part2.yaml
 python Train.py experiments/albunet_valid/train_config_2nd_stage.yaml
 ```
+As an output, we get a checkpoints in corresponding folder.
+
 Inference:
 ```bash
 python Inference.py experiments/albunet_valid/2nd_stage_inference.yaml
 ```
+As an output, we get a pickle-file with mapping the file name into a mask with pneumathorax probabilities.
+
 Submit:
 ```bash
 python TripletSubmit.py experiments/albunet_valid/2nd_stage_submit.yaml
 ```
+As an output, we get submission file with rle.
 
 ## Best experiments:
 - albunet_public - best model for Public Leaderboard
