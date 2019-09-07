@@ -17,7 +17,7 @@ The decision rule is based on a doublet *(top_score_threshold, min_contour_area)
 
 Those images that didn't pass this doublet of thresholds were counted non-pneumothorax images.
 
-For the remaining pneumothorax images, we binarize basic sigmoid mask using *bottom_score_threshold* (another binariztion threshold).
+For the remaining pneumothorax images, we binarize basic sigmoid mask using *bottom_score_threshold* (another binariztion threshold, less then *top_score_threshold*).  You may notice that most participants used the same scheme under the assumption that *bottom_score_threshold = top_score_threshold*.
 
 The simplified version of this scheme:
 ```python
@@ -36,8 +36,7 @@ return mask
 Used \[[combo loss\]](https://github.com/SpaceNetChallenge/SpaceNet_Off_Nadir_Solutions/blob/master/selim_sef/training/losses.py) combinations of BCE, dice and focal. In the best experiments the weights of (BCE, dice, focal), that I used were:
 - (3,1,4) for albunet_valid and seunet;
 - (1,1,1) for albunet_public;
-- (2,1,2) for resnet50
-respectively.
+- (2,1,2) for resnet50.
  
 ### Sliding sample rate
 Let's name portion of pneumathorax images as sample rate.
@@ -56,6 +55,7 @@ I can't provide fully reproducible solution because  during learning process I w
 - **second_stage** - simple uptrain with relatively small learning rate(1e-5 or 1e-6), small sample rate (0.5) and CosineAnnealingLR or CosineAnnealingWarmRestarts scheduler.
 
 All these parts are presented in the corresponding experiment folder
+
 ### Augmentations
 Used following transforms from \[[albumentations\]](https://github.com/albu/albumentations)
 ```python
