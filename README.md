@@ -39,6 +39,16 @@ Used \[[combo loss\]](https://github.com/SpaceNetChallenge/SpaceNet_Off_Nadir_So
 - (3,1,4) for albunet_valid and seunet;
 - (1,1,1) for albunet_public;
 - (2,1,2) for resnet50.
+
+**Why exactly these weights?**
+
+In the beginning, I trained using only 1-1-1 scheme and this way I get my best public score.
+
+I noticed that in older epochs, Dice loss is higher than the rest about 10 times.
+
+For balancing them I decide to use a 3-1-4 scheme and it got me the best validation score.
+
+As a compromise I chose 2-1-2 scheme for resnet50)
  
 ### Sliding sample rate
 Let's name portion of pneumathorax images as sample rate.
