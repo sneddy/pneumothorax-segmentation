@@ -97,6 +97,9 @@ here will be guide for transforming input data to my format
 Training:
 ```bash
 python Train.py experiments/albunet_valid/train_config_part0.yaml
+python Train.py experiments/albunet_valid/train_config_part1.yaml
+python Train.py experiments/albunet_valid/train_config_part2.yaml
+python Train.py experiments/albunet_valid/train_config_2nd_stage.yaml
 ```
 Inference:
 ```bash
