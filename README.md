@@ -31,6 +31,7 @@ return mask
 ### Search best triplet thresholds during validation 
 - Best triplet on validation: (0.75, 2000, 0.3).
 - Best triplet on Public Leaderboard: (0.7, 600, 0.3)
+For my final submission I chose something between these triplets.
 
 ### Combo loss
 Used \[[combo loss\]](https://github.com/SpaceNetChallenge/SpaceNet_Off_Nadir_Solutions/blob/master/selim_sef/training/losses.py) combinations of BCE, dice and focal. In the best experiments the weights of (BCE, dice, focal), that I used were:
