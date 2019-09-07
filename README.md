@@ -86,6 +86,9 @@ All choosen experiments was uptrained on second stage data
 ### Checkpoints averaging
 Top3 checkpoints averaging from each fold from each pipeline on inference
 
+### Small batchsize without accumulation
+A batch size of 2-4 pictures is enough and all my experiments were run on one (sometimes two) 1080-Ti.
+
 ### Horizontal flip TTA
 
 ## Install
