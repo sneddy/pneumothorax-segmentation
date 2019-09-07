@@ -127,4 +127,6 @@ But I suspected overfitting for this model therefore both final submissions were
 - 0.8679
 - 0.8641
 
+I suspect that the best solution would be ensemble believed in the validation scores more, but used more "weak" triplet thresholds.
+
 
