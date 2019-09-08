@@ -112,6 +112,7 @@ A batch size of 2-4 pictures is enough and all my experiments were run on one (s
     │   │   │   ├── checkpoints
     │   │   │   │   ├── fold_i
     │   │   │   │   │   ├──topk_checkpoint_from_fold_i_epoch_k.pth 
+    │   │   │   │   │   ├──summary.csv
     │   │   │   │   ├──best_checkpoint_from_fold_i.pth
     │   │   │   ├── log
     ├── input                
