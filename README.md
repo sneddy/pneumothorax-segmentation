@@ -101,7 +101,6 @@ A batch size of 2-4 pictures is enough and all my experiments were run on one (s
 
 ### Horizontal flip TTA
 
-
 ## File structure
     ├── unet_pipeline
     │   ├── experiments
