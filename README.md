@@ -51,7 +51,7 @@ For balancing them I decide to use a 3-1-4 scheme and it got me the best validat
 As a compromise I chose 2-1-2 scheme for resnet50)
  
 ### Sliding sample rate
-Let's name portion of pneumathorax images as sample rate.
+Let's name portion of pneumothorax images as sample rate.
 
 The main idea is control this portion using sampler of torch dataset. 
 
@@ -123,7 +123,7 @@ Inference:
 ```bash
 python Inference.py experiments/albunet_valid/2nd_stage_inference.yaml
 ```
-As an output, we get a pickle-file with mapping the file name into a mask with pneumathorax probabilities.
+As an output, we get a pickle-file with mapping the file name into a mask with pneumothorax probabilities.
 
 Submit:
 ```bash
@@ -137,7 +137,7 @@ As an output, we get submission file with rle.
 - seunet - best seresnext50 model on validation
 - resnet50 - best resnet50 model on validation
 
-![picture alt](https://github.com/sneddy/kaggle-pneumathorax/blob/master/dashboard.png)
+![picture alt](https://github.com/sneddy/kaggle-pneumothorax/blob/master/dashboard.png)
 
 
 ## Final Submission
