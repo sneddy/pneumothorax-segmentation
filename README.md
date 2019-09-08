@@ -104,6 +104,16 @@ A batch size of 2-4 pictures is enough and all my experiments were run on one (s
 
 ## File structure
     ├── unet_pipeline
+    │   ├── experiments
+    │   │   ├── some_experiment
+    │   │   │   ├── train_config.yaml
+    │   │   │   ├── inference_config.yaml
+    │   │   │   ├── submit_config.yaml
+    │   │   │   ├── checkpoints
+    │   │   │   │   ├── fold_i
+    │   │   │   │   │   ├──topk_checkpoint_from_fold_i_epoch_k.pth 
+    │   │   │   │   ├──best_checkpoint_from_fold_i.pth
+    │   │   │   ├── log
     ├── input                
     │   ├── dicom_train
     │   │   ├── some_folder
