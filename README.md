@@ -101,13 +101,24 @@ A batch size of 2-4 pictures is enough and all my experiments were run on one (s
 
 ### Horizontal flip TTA
 
+
+## File structure
+    ├── unet_pipeline
+    ├── input                
+    │   ├── dicom_train
+    │   ├── dicom_test       
+    │   └── new_train_rle.csv
+    └── ...
+All scripts must be run from unet_pipeline folder.
+
 ## Install
 ```bash
 pip install -r requirements.txt
 ```
 
 ## Data Preparation
-here will be guide for transforming input data to my format
+
+
 
 ## Pipeline launch example
 Training:
