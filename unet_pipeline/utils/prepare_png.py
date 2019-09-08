@@ -83,8 +83,8 @@ def save_test(test_images_names, out_path='../dataset128', img_size=128, n_threa
 
 def main():
 	args = argparser()
-	train_fns = sorted(glob('{}/*.dcm'.format(args.train_path)))
-	test_fns = sorted(glob('{}/*.dcm'.format(args.test_path)))
+	train_fns = sorted(glob('{}/*/*/*.dcm'.format(args.train_path)))
+	test_fns = sorted(glob('{}/*/*/*.dcm'.format(args.test_path)))
 	rle = pd.read_csv(args.rle_path)
 	out_path = args.out_path
 	img_size = args.img_size
