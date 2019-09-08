@@ -106,9 +106,10 @@ A batch size of 2-4 pictures is enough and all my experiments were run on one (s
     ├── unet_pipeline
     ├── input                
     │   ├── dicom_train
-    │   ├── dicom_test       
+    │   ├── dicom_test    
+    |   ├── new_sample_submission.csv
     │   └── new_train_rle.csv
-    └── ...
+    └── requirements.txt
 All scripts must be run from unet_pipeline folder.
 
 ## Install
