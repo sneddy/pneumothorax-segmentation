@@ -116,7 +116,6 @@ A batch size of 2-4 pictures is enough and all my experiments were run on one (s
     |   ├── new_sample_submission.csv
     │   └── new_train_rle.csv
     └── requirements.txt
-All scripts must be run from unet_pipeline folder.
 
 ## Install
 ```bash
@@ -133,6 +132,7 @@ python prepare_png.py -img_size 1024 -train_path ../../input/dicom_train test_pa
 ## Pipeline launch example
 Training:
 ```bash
+cd unet_pipeline
 python Train.py experiments/albunet_valid/train_config_part0.yaml
 python Train.py experiments/albunet_valid/train_config_part1.yaml
 python Train.py experiments/albunet_valid/train_config_part2.yaml
@@ -142,12 +142,14 @@ As an output, we get a checkpoints in corresponding folder.
 
 Inference:
 ```bash
+cd unet_pipeline
 python Inference.py experiments/albunet_valid/2nd_stage_inference.yaml
 ```
 As an output, we get a pickle-file with mapping the file name into a mask with pneumothorax probabilities.
 
 Submit:
 ```bash
+cd unet_pipeline
 python TripletSubmit.py experiments/albunet_valid/2nd_stage_submit.yaml
 ```
 As an output, we get submission file with rle.
@@ -173,5 +175,3 @@ But I suspected overfitting for this model therefore both final submissions were
 - 0.8641
 
 I suspect that the best solution would be ensemble believed in the validation scores more, but used more "weak" triplet thresholds.
-
-
