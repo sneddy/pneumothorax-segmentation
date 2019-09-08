@@ -106,7 +106,13 @@ A batch size of 2-4 pictures is enough and all my experiments were run on one (s
     ├── unet_pipeline
     ├── input                
     │   ├── dicom_train
-    │   ├── dicom_test    
+    │   │   ├── some_folder
+    │   │   │   ├── some_folder
+    │   │   │   │   ├── some_train_file.dcm
+    │   ├── dicom_test   
+    │   │   ├── some_folder
+    │   │   │   ├── some_folder
+    │   │   │   │   ├── some_test_file.dcm
     |   ├── new_sample_submission.csv
     │   └── new_train_rle.csv
     └── requirements.txt
@@ -118,7 +124,10 @@ pip install -r requirements.txt
 ```
 
 ## Data Preparation
-
+```bash
+cd unet_pipeline/utils
+python prepare_png.py -img_size 1024 -train_path ../../input/dicom_train test_path ../../input/dicom_test -out_path ../../input/dataset1024 -rle_path ../../input/new_train_rle.csv -n_threads 8
+```
 
 
 ## Pipeline launch example
