@@ -133,6 +133,7 @@ pip install -r requirements.txt
 ```
 
 ## Data Preparation
+You need to paste your own names of input data folders and rle_fole
 ```bash
 cd unet_pipeline/utils
 python prepare_png.py -img_size 1024 -train_path ../../input/dicom_train test_path ../../input/dicom_test -out_path ../../input/dataset1024 -rle_path ../../input/new_train_rle.csv -n_threads 8
