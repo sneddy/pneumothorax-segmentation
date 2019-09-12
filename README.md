@@ -1,5 +1,17 @@
 # SIIM-ACR Pneumothorax Segmentation
 
+If you use this code in research, please cite the following paper:
+```
+@misc{Aimoldin2019,
+  author = {Aimoldin Anuar},
+  title = {pneumothorax-segmentation},
+  year = {2019},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/sneddy/pneumothorax-segmentation}},
+}
+```
+
 # First place solution 
 
 ## Model Zoo
