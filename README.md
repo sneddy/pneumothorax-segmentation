@@ -4,7 +4,7 @@ If you use this code in research, please cite the following paper:
 ```
 @misc{Aimoldin2019,
   author = {Aimoldin Anuar},
-  title = {SIIM-ACR Pneumothorax Segmentation},
+  title = {{SIIM-ACR} {P}neumothorax {S}egmentation},
   year = {2019},
   publisher = {GitHub},
   journal = {GitHub repository},
