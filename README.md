@@ -13,6 +13,9 @@ If you use this code in research, please cite the following paper:
 ```
 
 # First place solution 
+Video with short explanation: https://youtu.be/Wuf0wE3Mrxg
+Presentation with short explanation: yadi.sk/i/oDYnpvMhqi8a7w
+Competition: kaggle.com/c/siim-acr-pneumothorax-segmentation
 
 ## Model Zoo
 - AlbuNet (resnet34) from [\[ternausnets\]](https://github.com/ternaus/TernausNet)
