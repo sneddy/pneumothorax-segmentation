@@ -6,14 +6,17 @@ import pandas as pd
 import numpy as np
 
 from tqdm import tqdm
-import heapq
 from pathlib import Path
 
+import heapq
+from collections import defaultdict
 
 class Learning():
     def __init__(self,
                  optimizer, 
+                 binarizer_fn,
                  loss_fn,
+                 eval_fn,
                  device,
                  n_epoches,
                  scheduler,    
@@ -31,7 +34,10 @@ class Learning():
         self.logger = logger
 
         self.optimizer = optimizer
+        self.binarizer_fn = binarizer_fn
         self.loss_fn = loss_fn
+        self.eval_fn = eval_fn
+
         self.device = device
         self.n_epoches = n_epoches
         self.scheduler = scheduler
@@ -83,48 +89,52 @@ class Learning():
             self.optimizer.zero_grad()
         return loss.item(), predicted
 
-
-    def valid_epoch(self, model, loader, local_metric_fn):
+    def valid_epoch(self, model, loader):
         tqdm_loader = tqdm(loader)
         current_score_mean = 0
-        eval_list = []
+        used_thresholds = self.binarizer_fn.thresholds
+        metrics = defaultdict(float)
+
         for batch_idx, (imgs, labels) in enumerate(tqdm_loader):
             with torch.no_grad():
-                predicted = self.batch_valid(model, imgs)
-                labels = labels.numpy()
-                eval_list.append((predicted, labels))
-                score = local_metric_fn(predicted, labels)
-                current_score_mean = (current_score_mean * batch_idx + score) / (batch_idx + 1)
-                tqdm_loader.set_description('score: {:.5}'.format(current_score_mean))
+                predicted_probas = self.batch_valid(model, imgs)
+                labels = labels.to(self.device)
+                mask_generator = self.binarizer_fn.transform(predicted_probas)
+                for current_thr, current_mask in zip(used_thresholds, mask_generator):
+                    current_metric = self.eval_fn(current_mask, labels).item()
+                    current_thr = tuple(current_thr)
+                    metrics[current_thr] = (metrics[current_thr] * batch_idx + current_metric) / (batch_idx + 1)
 
-        return eval_list, current_score_mean
+                best_threshold = max(metrics, key=metrics.get)
+                best_metric = metrics[best_threshold]
+                tqdm_loader.set_description('score: {:.5} on {}'.format(best_metric, best_threshold))
+
+        return metrics, best_metric
 
     def batch_valid(self, model, batch_imgs):
         batch_imgs = batch_imgs.to(self.device)
         predicted = model(batch_imgs)
         predicted = torch.sigmoid(predicted)
-        return predicted.cpu().numpy()
+        return predicted
 
-    def process_summary(self, eval_list, epoch, global_metric_fn):
-        self.logger.info('{} epoch: \t start searching thresholds....'.format(epoch))
-        selected_score, (top_thr, area_thr, bot_thr) = global_metric_fn(eval_list)
+    def process_summary(self, metrics, epoch):
+        best_threshold = max(metrics, key=metrics.get)
+        best_metric = metrics[best_threshold]
+
+        epoch_summary = pd.DataFrame.from_dict([metrics])
+        epoch_summary['epoch'] = epoch
+        epoch_summary['best_metric'] = best_metric
+        epoch_summary = epoch_summary[['epoch', 'best_metric'] + list(metrics.keys())]
+        epoch_summary.columns = [str(col) for col in epoch_summary.columns]
         
-        epoch_summary = pd.DataFrame(
-            data=[[epoch, top_thr, area_thr, bot_thr, selected_score]],
-            columns = ['epoch', 'best_top_thr', 'best_area_thr', 'top_bot_thr', 'best_metric']
-        )
-
-        self.logger.info('{} epoch: \t Best triplets: {:.2}, {}, {:.2}'.format(epoch, top_thr, area_thr, bot_thr))
-        self.logger.info('{} epoch: \t Calculated score: {:.6}'.format(epoch, selected_score))
+        self.logger.info('{} epoch: \t Score: {:.5}\t Params: {}'.format(epoch, best_metric, best_threshold))
 
         if not self.summary_file.is_file():
             epoch_summary.to_csv(self.summary_file, index=False)
         else:
             summary = pd.read_csv(self.summary_file)
-            summary = summary.append(epoch_summary)
-            summary.to_csv(self.summary_file, index=False)
-
-        return selected_score
+            summary = summary.append(epoch_summary).reset_index(drop=True)
+            summary.to_csv(self.summary_file, index=False)  
 
     @staticmethod
     def get_state_dict(model):
@@ -160,8 +170,7 @@ class Learning():
         else:
             self.scheduler.step()
 
-
-    def run_train(self, model, train_dataloader, valid_dataloader, local_metric_fn, global_metric_fn):
+    def run_train(self, model, train_dataloader, valid_dataloader):
         model.to(self.device)
         for epoch in range(self.n_epoches):
             if not self.freeze_model:
@@ -176,12 +185,12 @@ class Learning():
 
             self.logger.info('{} epoch: \t start validation....'.format(epoch))
             model.eval()
-            eval_list, val_score = self.valid_epoch(model, valid_dataloader, local_metric_fn)
+            metrics, score = self.valid_epoch(model, valid_dataloader)
 
-            selected_score = self.process_summary(eval_list, epoch, global_metric_fn)
-    
-            self.post_processing(selected_score, epoch, model)
-                
+            self.process_summary(metrics, epoch)
+
+            self.post_processing(score, epoch, model)
+
             if epoch - self.best_epoch > self.early_stopping:
                 self.logger.info('EARLY STOPPING')
                 break
