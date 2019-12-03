@@ -76,6 +76,14 @@ CHECKPOINTS:
     TOPK: 3
 
 # validation
-EVALUATION:
-    SEARCH_PAIRS: [[0.75, 1000],[0.75, 2000]]
-    BOT_THRESHOLDS: [0.3, 0.4]
+MASK_BINARIZER:
+  PY: MaskBinarizers
+  CLASS: TripletMaskBinarization
+  ARGS:
+    triplets: [[0.75, 1000, 0.3], [0.75, 1000, 0.4], [0.75, 2000, 0.3], [0.75, 2000, 0.4], [0.6, 2000, 0.3], [0.6, 2000, 0.4], [0.6, 3000, 0.3], [0.6, 3000, 0.4]]
+
+EVALUATION_METRIC:
+  PY: Losses
+  CLASS: dice_metric
+  ARGS: 
+    per_image: True
