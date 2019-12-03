@@ -6,28 +6,32 @@ from torch.autograd import Variable
 
 try:
     from itertools import ifilterfalse
-except ImportError: 
+except ImportError:  # py3k
     from itertools import filterfalse
 
 eps = 1e-6
 
 
-def dice_round(preds, trues, per_image=False):
-    preds = preds.float()
-    return soft_dice_loss(preds, trues, per_image)
-
-
-def soft_dice_loss(outputs, targets, per_image=False):
-    batch_size = outputs.size()[0]
-    eps = 1e-5
-    if not per_image:
-        batch_size = 1
-    dice_target = targets.contiguous().view(batch_size, -1).float()
-    dice_output = outputs.contiguous().view(batch_size, -1)
+def soft_dice_loss(outputs, targets, per_image=False, per_channel=False):
+    batch_size, n_channels = outputs.size(0), outputs.size(1)
+    
+    eps = 1e-6
+    n_parts = 1
+    if per_image:
+        n_parts = batch_size
+    if per_channel:
+        n_parts = batch_size * n_channels
+    
+    dice_target = targets.contiguous().view(n_parts, -1).float()
+    dice_output = outputs.contiguous().view(n_parts, -1)
     intersection = torch.sum(dice_output * dice_target, dim=1)
     union = torch.sum(dice_output, dim=1) + torch.sum(dice_target, dim=1) + eps
     loss = (1 - (2 * intersection + eps) / union).mean()
     return loss
+
+def dice_metric(preds, trues, per_image=False, per_channel=False):
+    preds = preds.float()
+    return 1 - soft_dice_loss(preds, trues, per_image, per_channel)
 
 
 def jaccard(outputs, targets, per_image=False, non_empty=False, min_pixels=5):
